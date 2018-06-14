@@ -1,17 +1,18 @@
 import pandas as pd
 
-url = "/data/MPI_national.csv"
+url = "C:/Users/gollo/gitRepos/Tarea1_RecPatrones/data/MPI_national.csv"
 # load dataset into Pandas DataFrame
-df = pd.read_csv(url, names=['sepal length','sepal width','petal length','petal width','target'])
+df = pd.read_csv(url, names=['ISO','Country','MPI Urban','Headcount Ratio Urban','Intensity of Deprivation Urban','MPI Rural','Headcount Ratio Rural','Intensity of Deprivation Rural'])
 
 
 
 from sklearn.preprocessing import StandardScaler
-features = ['sepal length', 'sepal width', 'petal length', 'petal width']
+features = ['MPI Urban','Headcount Ratio Urban','Intensity of Deprivation Urban','MPI Rural','Headcount Ratio Rural','Intensity of Deprivation Rural']
 # Separating out the features
 x = df.loc[:, features].values
 # Separating out the target
-y = df.loc[:,['target']].values
+y = df.loc[:,['ISO']].values
+
 # Standardizing the features
 x = StandardScaler().fit_transform(x)
 
@@ -24,7 +25,7 @@ principalDf = pd.DataFrame(data = principalComponents
 
 
 
-finalDf = pd.concat([principalDf, df[['target']]], axis = 1)
+finalDf = pd.concat([principalDf, df[['MPI Urban']]], axis = 1)
 
 
 
